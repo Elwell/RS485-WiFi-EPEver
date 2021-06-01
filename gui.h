@@ -42,7 +42,7 @@ void handleOTAUpload(AsyncWebServerRequest* request, String filename, size_t ind
 
 void setupGUI()
 {
-    ESPUI.begin("RS485-WiFi v0.51"); // It is important that ESPUI.begin(...) is called first so that ESPUI.server is initalized
+    ESPUI.begin("RS485-WiFi v0.51.AE"); // It is important that ESPUI.begin(...) is called first so that ESPUI.server is initalized
 
     ESPUI.server->on("/ota", 
         HTTP_POST, 

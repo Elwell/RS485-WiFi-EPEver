@@ -2,6 +2,7 @@ void Influxdb_postData() {
   String poststring;
   String poststring1;
   HTTPClient http;
+  WiFiClient client;
 
 
   //Construct URL for the influxdb
@@ -31,15 +32,13 @@ void Influxdb_postData() {
   poststring = poststring + "Battery-Voltage-Status value=" + '"' + String(batt_volt_status[status_batt.volt]) + '"' + "\n";
   poststring = poststring + "Battery-Temp value=" + '"' + String(batt_temp_status[status_batt.temp]) + '"' + "\n";
   poststring = poststring + "Charger-Mode value=" + '"' + String(charger_charging_status[ charger_mode]) + '"' + "\n";
-     
-  http.begin(url);
+
+  http.begin(client, url);
   http.addHeader("Content-Type", "data-binary");
   int httpCode = http.POST(poststring);
   String payload = http.getString();
   Serial.println (payload);
-  
-  WiFiClient client;
-  
+
   if (!client.connect(myConfig.influxdb_host, myConfig.influxdb_httpPort)) {
     Serial.println("connection failed");
 
